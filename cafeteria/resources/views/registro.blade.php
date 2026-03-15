@@ -12,7 +12,7 @@
 Registro de Cliente
 </h2>
 
-<form action="" method="POST">
+<form action="{{ route('registro.store') }}" method="POST">
 @csrf
 
 <!-- Nombre -->
@@ -30,11 +30,23 @@ required>
 <!-- Apellido -->
 <div class="mb-4">
 <label class="block text-gray-700 font-semibold mb-1">
-Apellido
+Apellido Paterno
 </label>
 <input 
 type="text"
-name="apellido"
+name="apellidoP"
+class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600"
+required>
+</div>
+
+<!-- Apellido -->
+<div class="mb-4">
+<label class="block text-gray-700 font-semibold mb-1">
+Apellido Materno
+</label>
+<input 
+type="text"
+name="apellidoM"
 class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600"
 required>
 </div>
@@ -57,7 +69,17 @@ Correo electrónico
 </label>
 <input 
 type="email"
-name="correo"
+name="email"
+class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600">
+</div>
+
+<div class="mb-4">
+<label class="block text-gray-700 font-semibold mb-1">
+Password
+</label>
+<input 
+type="password"
+name="password"
 class="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600">
 </div>
 
