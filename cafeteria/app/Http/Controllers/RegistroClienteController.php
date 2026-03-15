@@ -16,33 +16,32 @@ class RegistroClienteController extends Controller
     }
 
     public function store(Request $request)
-    {
+{
+    $response = Http::post('http://localhost:8001/api/registro', [
 
-        $response = Http::post('http://localhost:8001/api/registro', [
+        'nombre' => $request->nombre,
+        'apellidoP' => $request->apellidoP,
+        'apellidoM' => $request->apellidoM,
+        'telefono' => $request->telefono,
+        'email' => $request->email,
+        'password' => $request->password
 
-            'nombre' => $request->nombre,
-            'apellidoP' => $request->apellidoP,
-            'apellidoM' => $request->apellidoM,
-            'telefono' => $request->telefono,
-            'email' => $request->email,
-            'password' => $request->password
+    ]);
 
+
+    if ($response->successful()) {
+
+        $data = $response->json();
+
+        // Guardar cliente en sesión
+        session([
+            'cliente' => $data['cliente']
         ]);
 
-        if($response->successful()){
-
-            $data = $response->json();
-
-            $cliente = Cliente::find($data['cliente']['id_cliente']);
-
-            Auth::login($cliente);
-
-            return redirect('/inicio')->with('success','Registro exitoso');
-
-        }
-
-        return back()->with('error','Error al registrar cliente');
-
+        return redirect('/inicio')->with('success','Registro exitoso. Bienvenido '.$data['cliente']['nombre']);
     }
+
+    return back()->with('error','Error al registrar cliente');
+}
 
 }

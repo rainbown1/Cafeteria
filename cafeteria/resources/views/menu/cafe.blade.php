@@ -24,19 +24,7 @@
             <a  class="text-blue-700 font-bold text-lg" href="/detalle/{{ $producto->id_producto }}">
     Ver detalle
 </a>
-            <form action="{{ route('carrito.agregar') }}" method="POST">
-            @csrf
-
-            <input type="hidden" name="producto[id_producto]" value="{{ $producto->id_producto }}">
-            <input type="hidden" name="producto[nombre]" value="{{ $producto->nombre }}">
-            <input type="hidden" name="producto[precio]" value="{{ $producto->precio }}">
-            <input type="hidden" name="producto[img]" value="{{ $producto->img }}">
-
-            <button class="bg-green-600 text-white px-4 py-2 rounded">
-            Agregar al carrito
-            </button>
-
-            </form>
+            
         </div>
 
        @endforeach

@@ -20,8 +20,7 @@
             Iniciar sesión
             </h2>
 
-                <form action="{{ route('login.cliente') }}" method="POST">
-
+                <form action="{{ route('login') }}" method="POST">
                 @csrf
 
                     <input type="email" name="email" placeholder="Correo"
@@ -30,7 +29,7 @@
                     <input type="password" name="password" placeholder="Contraseña"
                     class="w-full border p-2 mb-3">
 
-                        <button class="bg-amber-700 text-white w-full py-2 rounded">
+                        <button type="submit" class="bg-amber-700 text-white w-full py-2 rounded">
                         Entrar
                         </button>
 

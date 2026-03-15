@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Http;
 
 Class ProductosController extends Controller{
+
 public function index() {
  $response = Http::get('http://127.0.0.1:8001/api/productos');
        $productos =[];

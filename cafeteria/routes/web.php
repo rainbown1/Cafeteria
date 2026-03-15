@@ -4,14 +4,16 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\RegistroClienteController;
+use App\Http\Controllers\AuthClienteController;
 
 
 Route::view('/inicio','inicio');
 Route::view('/contacto','contacto');
 Route::view('/nosotros','nosotros');
 
-
-Route::post('logout', [AuthClienteController::class,'logout']);
+Route::get('/login', [AuthClienteController::class,'formLogin']);
+Route::post('logout', [AuthClienteController::class,'logout'])->name('logout');
+Route::post('/login', [AuthClienteController::class,'login'])->name('login');
 
 Route::get('/carrito',[CarritoController::class,'index'])->name('carrito');
 
@@ -23,7 +25,7 @@ Route::get('/carrito/eliminar/{id}',[CarritoController::class,'eliminar'])->name
 
 Route::get('/carrito/vaciar',[CarritoController::class,'vaciar'])->name('carrito.vaciar');
 
-Route::get('/productos',[ProductosController::class,'index']);
+Route::get('/cafe',[ProductosController::class,'index']);
 Route::get('/detalle/{id_producto}',[ProductosController::class,'show']);
 
 
