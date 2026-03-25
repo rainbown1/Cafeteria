@@ -8,28 +8,29 @@ use Illuminate\Support\Facades\Http;
 
 class PedidoController extends Controller
 {
-    private $apiUrl = 'http://localhost:8001/api';
+    private $apiUrl = 'http://localhost:8000/api';
+
+    // 🔹 Obtener token (ajusta según cómo lo guardes)
+    private function getToken()
+    {
+        return session('token');
+    }
 
     public function procesar(Request $request)
     {
-        $request->validate([
-            'id_mesa' => 'nullable|integer'
-        ]);
-
         $carrito = session()->get('carrito', []);
-        
+
         if (empty($carrito)) {
-            return redirect()->back()->with('error', 'El carrito está vacío');
+            return back()->with('error', 'El carrito está vacío');
         }
 
-        // Calcular total y preparar detalles
         $total = 0;
         $detalles = [];
-        
+
         foreach ($carrito as $id_producto => $producto) {
             $subtotal = $producto['precio'] * $producto['cantidad'];
             $total += $subtotal;
-            
+
             $detalles[] = [
                 'id_producto' => $id_producto,
                 'cantidad' => $producto['cantidad'],
@@ -38,31 +39,29 @@ class PedidoController extends Controller
             ];
         }
 
-        // Preparar datos del pedido
         $pedidoData = [
-            'id_cliente' => Auth::check() ? Auth::user()->id_cliente : null,
-            'id_mesa' => $request->id_mesa ?: null,
+            'id_mesa' => $request->id_mesa,
             'total' => $total,
             'detalles' => $detalles
         ];
 
         try {
-            // Enviar a la API
-            $response = Http::post($this->apiUrl . '/pedidos', $pedidoData);
+            $token = session('token');
 
-            if ($response->successful()) {
-                // Vaciar carrito
-                session()->forget('carrito');
-                
-                return redirect('/inicio')->with('success', '¡Pedido realizado con éxito!');
+            $response = Http::withToken($token)
+                ->post($this->apiUrl . '/pedidos/store', $pedidoData);
+
+            if (!$response->successful()) {
+                return back()->with('error', 'Error al procesar pedido ');
             }
 
-            // Si hay error, mostrar mensaje
-            $error = $response->json()['message'] ?? 'Error al procesar el pedido';
-            return redirect()->back()->with('error', $error);
+            session()->forget('carrito');
+
+                return redirect('/pago')
+                    ->with('success', 'Pedido realizado correctamente');
 
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Error de conexión con el servidor');
+            return back()->with('error', 'Error de conexión con la API');
         }
     }
 
@@ -73,15 +72,19 @@ class PedidoController extends Controller
         }
 
         try {
-            $response = Http::get($this->apiUrl . '/pedidos/cliente/' . Auth::user()->id_cliente);
-            
+            $token = $this->getToken();
+
+            $response = Http::withToken($token)
+                ->get($this->apiUrl . '/pedidos/cliente/' . Auth::user()->id_cliente);
+
             if ($response->successful()) {
                 $data = $response->json();
                 $pedidos = $data['pedidos'] ?? [];
                 return view('pedidos.index', compact('pedidos'));
             }
+
         } catch (\Exception $e) {
-            // Manejar error
+            return redirect()->back()->with('error', 'Error al obtener pedidos');
         }
 
         return view('pedidos.index', ['pedidos' => []]);

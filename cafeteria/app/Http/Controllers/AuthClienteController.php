@@ -12,10 +12,14 @@ class AuthClienteController extends Controller
     {
         return view('layout.login');
     }
-
-   public function login(Request $request)
+public function login(Request $request)
 {
-    $response = Http::post('http://localhost:8001/api/login', [
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required'
+    ]);
+
+    $response = Http::post('http://localhost:8000/api/login', [
         'email' => $request->email,
         'password' => $request->password
     ]);
@@ -24,9 +28,9 @@ class AuthClienteController extends Controller
 
         $data = $response->json();
 
-        // Guardar datos del cliente en sesión
         session([
-            'cliente' => $data['cliente']
+            'cliente' => $data['cliente'],
+            'token' => $data['token']
         ]);
 
         return redirect('/inicio')->with('success', 'Bienvenido '.$data['cliente']['nombre']);
@@ -35,10 +39,18 @@ class AuthClienteController extends Controller
     return back()->with('error', 'Correo o contraseña incorrectos');
 }
 
-    public function logout()
-    {
-        session()->forget('cliente');
+public function logout(Request $request)
+{
+    
+    $token = session('token');
 
-        return redirect('/login');
-    }
+    Http::withHeaders([
+        'Authorization' => 'Bearer '.$token,
+        'Accept' => 'application/json'
+    ])->post('http://localhost:8000/api/logout');
+
+    session()->forget(['cliente','token']);
+
+    return redirect('/login');
+}
 }

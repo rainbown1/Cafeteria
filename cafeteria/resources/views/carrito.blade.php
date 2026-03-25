@@ -113,20 +113,13 @@
                     </label>
                     <select name="id_mesa" id="id_mesa" 
                             class="w-full md:w-64 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-amber-600">
-                        <option value="">Seleccionar mesa (opcional)</option>
+                        <option value="">Seleccionar mesa</option>
                         <option value="1">Mesa 1</option>
                         <option value="2">Mesa 2</option>
                         <option value="3">Mesa 3</option>
                         <option value="4">Mesa 4</option>
                         <option value="5">Mesa 5</option>
                     </select>
-                    <p class="text-sm text-gray-500 mt-1">
-                        @auth
-                            Pedido a nombre de: <span class="font-semibold">{{ Auth::user()->nombre }}</span>
-                        @else
-                            <span class="text-amber-600">Inicia sesión para guardar tu historial de pedidos</span>
-                        @endauth
-                    </p>
                 </div>
 
                 <!-- Resumen del pedido -->

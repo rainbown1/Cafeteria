@@ -16,7 +16,7 @@
 
         <div class="bg-white rounded-lg shadow-lg p-4">
             <h3 class="font-bold text-lg">{{$producto->nombre}}</h3>
-            <img src="http://127.0.0.1:8001/{{ $producto->img }}" class="w-70 h-75" alt="">
+            <img src="http://127.0.0.1:8000/{{ $producto->img }}" class="w-70 h-75" alt="">
              <h3 class="font-bold text-lg">{{$producto->descripcion}}</h3>
              <h3 class="font-bold text-lg text-amber-700">Categoria: </h3>
              <h3 class="font-bold text-lg"> {{$producto->categorias->nombre}}</h3>

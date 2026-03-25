@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 Class ProductosController extends Controller{
 
 public function index() {
- $response = Http::get('http://127.0.0.1:8001/api/productos');
+ $response = Http::get('http://127.0.0.1:8000/api/productos');
        $productos =[];
        
         if($response->successful()){
@@ -24,7 +24,7 @@ public function index() {
         }
 
         public function show($id_producto){
-             $response = Http::get("http://127.0.0.1:8001/api/productos/$id_producto");
+             $response = Http::get("http://127.0.0.1:8000/api/productos/$id_producto");
 
             if ($response->successful()) {
                 $productos = $response->object()->datos;

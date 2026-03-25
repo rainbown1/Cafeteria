@@ -248,9 +248,9 @@ class PhoneNumber extends \Faker\Provider\PhoneNumber
     /**
      * Generate a toll-free number.
      *
-     * @example A toll-free number: '8001234567'
+     * @example A toll-free number: '8000234567'
      * @example A toll-free number with spaces: '800 123 4567'
-     * @example A toll-free number with international code prefix: '+308001234567'
+     * @example A toll-free number with international code prefix: '+308000234567'
      * @example A toll-free number with international code prefix and spaces: '+30 800 123 4567'
      *
      * @return string

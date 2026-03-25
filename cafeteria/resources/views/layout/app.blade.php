@@ -18,10 +18,10 @@
    </svg>
 </button>
 
-<a href="{{ route('carrito') }}" class="fixed bottom-4 right-4 bg-taupe-500 hover:bg-taupe-700 text-white rounded-full p-3 shadow-lg flex items-center justify-center z-50">
+<a href="{{ route('carrito') }}" class="fixed bottom-4 right-4 bg-taupe-500 hover:bg-taupe-700 text-black rounded-full p-3 shadow-lg flex items-center justify-center z-50">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Uploaded to svgrepo.com" width="40px" height="40px" viewBox="0 0 32 32" xml:space="preserve">
                     <style type="text/css">
-                        .puchipuchi_een{fill:#ffffff;}
+                        .puchipuchi_een{fill:#000000;}
                     </style>
                     <path class="puchipuchi_een" d="M16,28c0,1.105-0.895,2-2,2s-2-0.895-2-2c0-1.105,0.895-2,2-2S16,26.895,16,28z M25,26  c-1.105,0-2,0.895-2,2c0,1.105,0.895,2,2,2s2-0.895,2-2C27,26.895,26.105,26,25,26z M27,21H12.281l0.5,2H27c0.553,0,1,0.448,1,1  s-0.447,1-1,1H12c-0.459,0-0.858-0.312-0.97-0.757L6.219,5H2C1.447,5,1,4.552,1,4s0.447-1,1-1h5c0.459,0,0.858,0.312,0.97,0.757  L8.78,7h0.001H30c0.308,0,0.599,0.142,0.788,0.385s0.257,0.559,0.182,0.858l-3,12C27.858,20.688,27.459,21,27,21z M22,10  c0,0.552,0.448,1,1,1s1-0.448,1-1c0-0.552-0.448-1-1-1S22,9.448,22,10z M18,10c0,0.552,0.448,1,1,1s1-0.448,1-1c0-0.552-0.448-1-1-1  S18,9.448,18,10z M14,10c0,0.552,0.448,1,1,1s1-0.448,1-1c0-0.552-0.448-1-1-1S14,9.448,14,10z M12,10c0-0.552-0.448-1-1-1  s-1,0.448-1,1c0,0.552,0.448,1,1,1S12,10.552,12,10z M14,14c0-0.552-0.448-1-1-1s-1,0.448-1,1c0,0.552,0.448,1,1,1S14,14.552,14,14z   M16,18c0-0.552-0.448-1-1-1s-1,0.448-1,1c0,0.552,0.448,1,1,1S16,18.552,16,18z M18,14c0-0.552-0.448-1-1-1s-1,0.448-1,1  c0,0.552,0.448,1,1,1S18,14.552,18,14z M20,18c0-0.552-0.448-1-1-1s-1,0.448-1,1c0,0.552,0.448,1,1,1S20,18.552,20,18z M22,14  c0-0.552-0.448-1-1-1s-1,0.448-1,1c0,0.552,0.448,1,1,1S22,14.552,22,14z M24,18c0-0.552-0.448-1-1-1s-1,0.448-1,1  c0,0.552,0.448,1,1,1S24,18.552,24,18z M26,14c0-0.552-0.448-1-1-1s-1,0.448-1,1c0,0.552,0.448,1,1,1S26,14.552,26,14z M27,11  c0.552,0,1-0.448,1-1c0-0.552-0.448-1-1-1s-1,0.448-1,1C26,10.552,26.448,11,27,11z"/>
                     </svg>
@@ -35,7 +35,7 @@
       <ul class="space-y-2">
            <!-- Icono Inicio -->
             <li>
-                <a href="/inicio" class="flex items-center p-2 w-full text-base font-normal text-white rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                <a href="/" class="flex items-center p-2 w-full text-base font-normal text-black rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-black dark:hover:bg-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 16 16" fill="currentColor">
                         <path d="M1 6V15H6V11C6 9.89543 6.89543 9 8 9C9.10457 9 10 9.89543 10 11V15H15V6L8 0L1 6Z"/>
                     </svg>
@@ -44,7 +44,7 @@
             </li>
             <!-- Icono Sobre Nosotros -->
             <li>
-                <a href="/nosotros" class="flex items-center p-2 w-full text-base font-normal text-white rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                <a href="/nosotros" class="flex items-center p-2 w-full text-base font-normal text-black rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-black dark:hover:bg-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="currentColor">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12ZM12 17.75C12.4142 17.75 12.75 17.4142 12.75 17V11C12.75 10.5858 12.4142 10.25 12 10.25C11.5858 10.25 11.25 10.5858 11.25 11V17C11.25 17.4142 11.5858 17.75 12 17.75ZM12 7C12.5523 7 13 7.44772 13 8C13 8.55228 12.5523 9 12 9C11.4477 9 11 8.55228 11 8C11 7.44772 11.4477 7 12 7Z"/>
                     </svg>
@@ -65,17 +65,9 @@
                 </button>
               <ul id="dropdown-authentication" class="hidden py-2 space-y-2">
                   <li>
-                      <a href="/cafe" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Cafe</a>
+                      <a href="/productos" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Productos</a>
                   </li>
-                  <li>
-                      <a href="/bebidas" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Bebidas</a>
-                  </li>
-                  <li>
-                      <a href="/postres" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Postres</a>
-                  </li>
-                  <li>
-                      <a href="/snacks" class="flex items-center p-2 pl-11 w-full text-base font-normal text-gray-900 rounded-lg transition duration-75 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Snacks</a>
-                  </li>
+                
               </ul>
           </li>
           <li>
@@ -101,9 +93,10 @@
           </li>
       </ul>
   </div>
+
   <div class="hidden absolute bottom-0 left-0 justify-center p-4 space-x-4 w-full lg:flex bg-taupe-700 dark:bg-taupe-700 z-20 border-r border-gray-200 dark:border-gray-700">
-    <a href="/registro" class="inline-flex justify-center p-2 text-gray-300 rounded cursor-pointer dark:text-gray-300 hover:text-white dark:hover:text-white hover:bg-gray-700 dark:hover:bg-gray-600">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="40px" height="40px" viewBox="0 0 32 32" class="text-white">
+    <a href="/perfil" class="inline-flex justify-center p-2 text-gray-300 rounded cursor-pointer dark:text-gray-300 hover:text-white dark:hover:text-white hover:bg-gray-700 dark:hover:bg-gray-600">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="40px" height="40px" viewBox="0 0 32 32" class="text-black">
             <path d="M16 15.503A5.041 5.041 0 1 0 16 5.42a5.041 5.041 0 0 0 0 10.083zm0 2.215c-6.703 0-11 3.699-11 5.5v3.363h22v-3.363c0-2.178-4.068-5.5-11-5.5z"/>
         </svg>
            @if(session()->has('cliente'))
@@ -121,7 +114,7 @@
 
                 <span class="ml-2">
                     <a href="/login">Iniciar sesión</a> | 
-                    <a href="/registro">Registrarse</a>
+                    <a href="{/registro">Registrarse</a>
                 </span>
 
             @endif
