@@ -42,6 +42,7 @@ class PedidoController extends Controller
         ];
 
         try {
+
             $token = session('token');
 
             $response = Http::withToken($token)
@@ -57,7 +58,7 @@ class PedidoController extends Controller
 
             session()->forget('carrito');
 
-                return redirect()->route('checkout', ['id_pedido' => $id_pedido])
+            return redirect()->route('checkout', ['id_pedido' => $id_pedido])
                     ->with('success', 'Pedido realizado correctamente');
 
         } catch (\Exception $e) {

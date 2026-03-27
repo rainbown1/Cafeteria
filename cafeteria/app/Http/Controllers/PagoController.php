@@ -11,9 +11,10 @@ use Illuminate\Support\Facades\Http;
 class PagoController extends Controller
 {
 
-    public function showCheckout($id_pedido)
-    {
+public function showCheckout($id_pedido){
     $token = session('token');
+
+    \Log::info('Token enviado a la API:', ['token' => substr($token, 0, 10) . '...']);
     
     if (!$token) {
         return redirect('/login')->with('error', 'Debes iniciar sesión');
@@ -22,7 +23,7 @@ class PagoController extends Controller
     $response = Http::withHeaders([
         'Authorization' => 'Bearer ' . $token,
         'Accept' => 'application/json'
-    ])->get('http://localhost:8000/api/pedido/' . $id_pedido . '/total');
+    ])->get('http://127.0.0.1:8000/api/pedido/' . $id_pedido . '/total');
 
      \Log::info('Respuesta API', [
             'status' => $response->status(),
@@ -45,8 +46,7 @@ class PagoController extends Controller
     ]);
 }
 
-    public function obtenerTotalPedido($id_pedido)
-    {
+public function obtenerTotalPedido($id_pedido){
 
         $token = session('token');
         
@@ -62,13 +62,13 @@ class PagoController extends Controller
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json'
-            ])->get('http://localhost:8000/api/pedido/' . $id_pedido . '/total');
+            ])->get('http://127.0.0.1:8000/api/pedido/' . $id_pedido . '/total');
             
             if ($response->successful()) {
                 $data = $response->json();
                 
                 $total = $data['total'];
-                return view('pago-exitoso', compact('total'));
+                return view('pago-exitoso/' . $id_pedido, compact('total'));
             } else {
                 return redirect()->with('error', 'pago no realizado');
             }
@@ -76,10 +76,9 @@ class PagoController extends Controller
         } catch (\Exception $e) {
             return redirect('inicio')->with('error', 'Error en el servidor');
         }
-    }
+}
 
-    public function procesarPago(Request $request)
-    {
+public function procesarPago(Request $request){
         try {
             // 1. Configurar credenciales
             MercadoPagoConfig::setAccessToken(config('mercadopago.access_token'));
@@ -110,12 +109,12 @@ class PagoController extends Controller
             
             // Devolver respuesta según el estado del pago
             if ($payment->status == 'approved') {
-                // --- NUEVO: Enviar datos a la API para guardar en DB ---
+                
             $token = session('token');
             $responseApi = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
                 'Accept' => 'application/json'
-            ])->post('http://localhost:8000/api/pagos', [
+            ])->post('http://127.0.0.1:8000/api/pagos', [
                 'id_pedido'   => $request->id_pedido, // Asegúrate de enviarlo desde el JS
                 'metodo_pago' => 'tarjeta',
                 'monto'       => $payment->transaction_amount,
@@ -126,8 +125,14 @@ class PagoController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'Pago aprobado y guardado en DB',
-                    'payment_id' => $payment->id
+                    'payment_id' => $payment->id,
+                    'id_pedido' => $request->id_pedido, // El ID de tu sistema
+                    'redirect_url' => url('/pago-exitoso/' . $request->id_pedido)
                 ]);
+            } else{
+
+                \Log::error("Error API Pagos: " . $responseApi->body());
+                
             }
                 return response()->json([
                     'success' => true,

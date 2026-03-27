@@ -92,7 +92,7 @@
     const mp = new MercadoPago("{{ $publicKey }}");
     
    const cardForm = mp.cardForm({
-      amount: "100.5",
+      amount: "{{ $total }}",
       iframe: true,
       form: {
         id: "form-checkout",
@@ -162,7 +162,7 @@
                 token,
                 issuer_id,
                 payment_method_id,
-                transaction_amount: Number(amount),
+                transaction_amount: parseFloat(amount),
                 installments: Number(installments),
                 description: "Descripción del producto",
                 payer: {
@@ -180,7 +180,7 @@
             if (result.success) {
               // Redirigir a página de éxito o mostrar mensaje
               alert('¡Pago exitoso! ID: ' + result.payment_id);
-              window.location.href = '/pago-exitoso';
+              window.location.href = result.redirect_url;
             } else {
               // Mostrar error al usuario
               alert('Error en el pago: ' + (result.message || 'Intenta nuevamente'));
