@@ -7,13 +7,18 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\AuthClienteController;
 use App\Http\Controllers\RegistroClienteController;
 use App\Http\Controllers\PerfilController;
+use App\Http\Controllers\PagoController;
 
 
 Route::view('/inicio','inicio');
 Route::view('/contacto','contacto');
 Route::view('/nosotros','nosotros');
-Route::view('/pago','pago');
 
+Route::get('/pago/{id_pedido}', [PagoController::class, 'showCheckout'])->name('checkout');
+
+Route::post('/process_payment', [PagoController::class, 'procesarPago'])->name('process.payment');
+
+Route::get('/pago-exitoso/{id_pedido}', [PagoController::class,'obtenerTotalPedido']);
 
 Route::view('/login','layout.login');
 Route::post('/login',[AuthClienteController::class,'login'])->name('login');
@@ -29,7 +34,7 @@ Route::get('/productos',[ProductosController::class,'index']);
 Route::get('/detalle/{id_producto}',[ProductosController::class,'show']);
 
 Route::post('/pedido/procesar', [PedidoController::class, 'procesar'])->name('pedido.procesar');
-Route::get('/mis-pedidos', [PedidoController::class, 'misPedidos'])->name('pedidos.mis-pedidos');
+
 
 Route::view('/registro','registro');
 Route::post('registro', [RegistroClienteController::class,'store'])->name('registro.store');

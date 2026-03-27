@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Coffe App @yield('app')</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -114,7 +115,7 @@
 
                 <span class="ml-2">
                     <a href="/login">Iniciar sesión</a> | 
-                    <a href="{/registro">Registrarse</a>
+                    <a href="/registro">Registrarse</a>
                 </span>
 
             @endif

@@ -10,11 +10,7 @@ class PedidoController extends Controller
 {
     private $apiUrl = 'http://localhost:8000/api';
 
-    // 🔹 Obtener token (ajusta según cómo lo guardes)
-    private function getToken()
-    {
-        return session('token');
-    }
+    
 
     public function procesar(Request $request)
     {
@@ -51,20 +47,24 @@ class PedidoController extends Controller
             $response = Http::withToken($token)
                 ->post($this->apiUrl . '/pedidos/store', $pedidoData);
 
+
             if (!$response->successful()) {
                 return back()->with('error', 'Error al procesar pedido ');
             }
 
+            $data = $response->json();
+            $id_pedido = $data['id_pedido'];
+
             session()->forget('carrito');
 
-                return redirect('/pago')
+                return redirect()->route('checkout', ['id_pedido' => $id_pedido])
                     ->with('success', 'Pedido realizado correctamente');
 
         } catch (\Exception $e) {
             return back()->with('error', 'Error de conexión con la API');
         }
     }
-
+    
     public function misPedidos()
     {
         if (!Auth::check()) {

@@ -11,3 +11,16 @@
     --color-taupe-500: oklch(71.4% 0.014 41.2);
     --color-taupe-700: oklch(43.8% 0.017 39.3);
 }
+
+#form-checkout {
+      display: flex;
+      flex-direction: column;
+      max-width: 600px;
+    }
+.container {
+      height: 18px;
+      display: inline-block;
+      border: 1px solid rgb(118, 118, 118);
+      border-radius: 2px;
+      padding: 1px 2px;
+    }

@@ -17,7 +17,9 @@ return [
     'postmark' => [
         'key' => env('POSTMARK_API_KEY'),
     ],
-
+    'mercadopago' => [
+        'access_token' => env('MERCADOPAGO_ACCESS_TOKEN'),
+    ],
     'resend' => [
         'key' => env('RESEND_API_KEY'),
     ],
